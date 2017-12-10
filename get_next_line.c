@@ -10,4 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include ""
+#include "get_next_line.h"
+
+int		line_lenght(char *line)
+{
+
+}
+
+int		get_next_line(const int fd, char **line)
+{
+	char buf[BUF_SIZE];
+	int i;
+	long long int j;
+	char *s;
+
+	s = line;
+	i = 0;
+	while((read(fd, buf, BUF_SIZE)) > 0)
+	{
+		j = 0;
+		while (j < BUF_SIZE && buf[j] != '\n')
+		{
+			*s = buf[j];
+			s++;
+			j++;
+		}
+	}
+	return (1);
+}

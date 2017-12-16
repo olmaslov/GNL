@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/08 17:04:00 by omaslov           #+#    #+#             */
-/*   Updated: 2017/12/08 17:04:00 by omaslov          ###   ########.fr       */
+/*   Created: 2017/11/11 05:59:08 by omaslov           #+#    #+#             */
+/*   Updated: 2017/11/11 06:03:58 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUF_SIZE 5
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "libft/libft.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line);
-
-typedef struct		s_list
+void	ft_lstadd(t_list **alst, t_list *new)
 {
-	char			*content;
-	struct s_list	*next;
-}					t_list;
-
-#endif
+	if (alst == NULL || new == NULL)
+		return ;
+	new->next = (*alst);
+	*alst = new;
+}

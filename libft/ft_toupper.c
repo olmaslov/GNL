@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: omaslov <omaslov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/08 17:02:00 by omaslov           #+#    #+#             */
-/*   Updated: 2017/12/08 17:02:00 by omaslov          ###   ########.fr       */
+/*   Created: 2017/10/29 13:06:54 by omaslov           #+#    #+#             */
+/*   Updated: 2017/10/29 14:18:13 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "get_next_line.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+int		ft_toupper(int c)
 {
-	int fd;
-	char *line;
-	int i;
-
-	line = (char *)malloc(10000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
-	printf("%s\n", line);
-	return (0);
+	if (c > 96 && c < 123)
+		c = c - 32;
+	return (c);
 }

@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: omaslov <omaslov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/08 17:02:00 by omaslov           #+#    #+#             */
-/*   Updated: 2017/12/08 17:02:00 by omaslov          ###   ########.fr       */
+/*   Created: 2017/10/29 12:52:11 by omaslov           #+#    #+#             */
+/*   Updated: 2017/10/29 14:33:39 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "get_next_line.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+int		ft_isalpha(int c)
 {
-	int fd;
-	char *line;
-	int i;
-
-	line = (char *)malloc(10000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
-	printf("%s\n", line);
+	if ((c > 64 && c < 91) || (c > 96 && c < 123))
+		return (1);
 	return (0);
 }

@@ -1,58 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_read.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/08 17:05:00 by omaslov           #+#    #+#             */
-/*   Updated: 2017/12/08 17:05:00 by omaslov          ###   ########.fr       */
+/*   Created: 2017/11/13 16:20:00 by omaslov           #+#    #+#             */
+/*   Updated: 2017/11/13 16:20:00 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-static int	ft_bufcnt(int fd)
+#define BUF_SIZE 1
+
+static int	ft_buffcnt(char *inp)
 {
 	char	buf1[BUF_SIZE];
 	int		len;
+	int		fd;
 
 	len = 0;
+	if (!(fd = open(inp, O_RDONLY)))
+		ft_putstr("Open error");
 	while ((read(fd, buf1, BUF_SIZE)) != 0)
 		len++;
 	close(fd);
 	return (len);
 }
 
-int		get_next_line(const int fd, char **line)
+char		*ft_read(char *inp)
 {
 	char	buf1[BUF_SIZE];
-	//char	*buff;
+	char	*buff;
 	int		ret;
-	int		j;
-	t_list	*list;
+	int		fd;
 
-
+	if (inp == NULL)
+		return (NULL);
 	ret = 0;
-
-	list->content = (char *)malloc(sizeof(char) * (1000 * BUF_SIZE) + 1);
+	buff = malloc(sizeof(char) * (ft_buffcnt(inp) * BUF_SIZE) + 1);
+	if (buff == NULL)
+		return (NULL);
+	if (!(fd = open(inp, O_RDONLY)))
+	{
+		ft_putstr("Open error");
+		free(buff);
+		return (NULL);
+	}
 	while (read(fd, buf1, BUF_SIZE))
 	{
-		j = 0;
-		while (buf1[j] != '\0')
-		{
-			list->content[ret] = buf1[j];
-			if (buf1[j] == '\n')
-			{
-				j++;
-				list->next = ft_lstnew(buf1 + j, 1000);
-				list->prev = list;
-				list = list->next;
-				ret = 0;
-			}
-			ret++;
-			j++;
-		}
+		buff[ret] = buf1[0];
+		ret++;
 	}
-	return (1);
+	return (buff);
 }

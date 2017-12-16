@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/08 17:04:00 by omaslov           #+#    #+#             */
-/*   Updated: 2017/12/08 17:04:00 by omaslov          ###   ########.fr       */
+/*   Created: 2017/10/27 21:14:11 by omaslov           #+#    #+#             */
+/*   Updated: 2017/11/09 12:57:53 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUF_SIZE 5
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "libft/libft.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line);
-
-typedef struct		s_list
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	char			*content;
-	struct s_list	*next;
-}					t_list;
+	size_t x;
+	size_t y;
+	size_t k;
 
-#endif
+	x = ft_strlen(s1);
+	k = ft_strlen(s2);
+	y = 0;
+	while (y < k && y < n)
+	{
+		s1[x++] = *s2++;
+		y++;
+	}
+	s1[x++] = '\0';
+	return (s1);
+}

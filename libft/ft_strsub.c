@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/08 17:04:00 by omaslov           #+#    #+#             */
-/*   Updated: 2017/12/08 17:04:00 by omaslov          ###   ########.fr       */
+/*   Created: 2017/11/02 12:59:01 by omaslov           #+#    #+#             */
+/*   Updated: 2017/11/08 17:13:04 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUF_SIZE 5
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "libft/libft.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line);
-
-typedef struct		s_list
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char			*content;
-	struct s_list	*next;
-}					t_list;
+	char	*s1;
+	int		i;
+	size_t	c;
 
-#endif
+	i = start;
+	c = 0;
+	if (s == NULL)
+		return (NULL);
+	s1 = (char *)malloc(sizeof(char) * (len) + 1);
+	if (s1 != NULL)
+	{
+		while (c < len)
+		{
+			s1[c] = s[i];
+			i++;
+			c++;
+		}
+		s1[c] = '\0';
+		return (s1);
+	}
+	return (NULL);
+}

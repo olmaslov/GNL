@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: omaslov <omaslov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/08 17:02:00 by omaslov           #+#    #+#             */
-/*   Updated: 2017/12/08 17:02:00 by omaslov          ###   ########.fr       */
+/*   Created: 2017/11/03 21:24:51 by omaslov           #+#    #+#             */
+/*   Updated: 2017/11/03 22:16:09 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "get_next_line.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_putendl(char const *s)
 {
-	int fd;
-	char *line;
-	int i;
-
-	line = (char *)malloc(10000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
-	printf("%s\n", line);
-	return (0);
+	if (s == NULL)
+		return ;
+	ft_putstr(s);
+	ft_putchar('\n');
 }

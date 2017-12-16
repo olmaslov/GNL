@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: omaslov <omaslov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/08 17:02:00 by omaslov           #+#    #+#             */
-/*   Updated: 2017/12/08 17:02:00 by omaslov          ###   ########.fr       */
+/*   Created: 2017/10/27 18:29:05 by omaslov           #+#    #+#             */
+/*   Updated: 2017/10/27 21:11:09 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "get_next_line.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+char	*ft_strcat(char *s1, const char *s2)
 {
-	int fd;
-	char *line;
-	int i;
+	size_t x;
 
-	line = (char *)malloc(10000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
-	printf("%s\n", line);
-	return (0);
+	x = ft_strlen(s1);
+	while (*s2 != '\0')
+		s1[x++] = *s2++;
+	s1[x++] = '\0';
+	return (s1);
 }

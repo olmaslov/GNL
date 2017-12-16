@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: omaslov <omaslov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/08 17:02:00 by omaslov           #+#    #+#             */
-/*   Updated: 2017/12/08 17:02:00 by omaslov          ###   ########.fr       */
+/*   Created: 2017/11/03 21:16:50 by omaslov           #+#    #+#             */
+/*   Updated: 2017/11/03 21:24:27 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "get_next_line.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_putstr(char const *s)
 {
-	int fd;
-	char *line;
-	int i;
-
-	line = (char *)malloc(10000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
-	printf("%s\n", line);
-	return (0);
+	if (s == NULL)
+		return ;
+	while (*s)
+		ft_putchar(*s++);
 }

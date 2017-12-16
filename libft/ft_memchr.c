@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omaslov <omaslov@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/08 17:04:00 by omaslov           #+#    #+#             */
-/*   Updated: 2017/12/08 17:04:00 by omaslov          ###   ########.fr       */
+/*   Created: 2017/10/26 22:41:52 by omaslov           #+#    #+#             */
+/*   Updated: 2017/11/11 03:00:00 by omaslov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUF_SIZE 5
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "libft/libft.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line);
-
-typedef struct		s_list
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	char			*content;
-	struct s_list	*next;
-}					t_list;
+	unsigned char	*s1;
+	size_t			i;
 
-#endif
+	i = 0;
+	s1 = (unsigned char *)s;
+	while (i < n)
+	{
+		if (s1[i] == (unsigned char)c)
+			return ((void *)(s1 + i));
+		i++;
+	}
+	return (NULL);
+}

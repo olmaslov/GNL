@@ -27,32 +27,34 @@ static int	ft_bufcnt(int fd)
 int		get_next_line(const int fd, char **line)
 {
 	char	buf1[BUF_SIZE];
-	//char	*buff;
+	char	*buff;
 	int		ret;
 	int		j;
-	t_list	*list;
+//	static t_file	*list;
 
 
 	ret = 0;
-
-	list->content = (char *)malloc(sizeof(char) * (1000 * BUF_SIZE) + 1);
+	buff = line;
+//	if (list == NULL)
+//		list = malloc(1);
+//	if (fd == list->fd)
+//		ret = list->countch;
 	while (read(fd, buf1, BUF_SIZE))
 	{
 		j = 0;
 		while (buf1[j] != '\0')
 		{
-			list->content[ret] = buf1[j];
+			buff[ret] = buf1[j];
 			if (buf1[j] == '\n')
 			{
-				j++;
-				list->next = ft_lstnew(buf1 + j, 1000);
-				list->prev = list;
-				list = list->next;
-				ret = 0;
+//				list->countch = ret -3;
+//				list->fd = fd;
+//				list = list->next;
+				return (1);
 			}
 			ret++;
 			j++;
 		}
 	}
-	return (1);
+	return (0);
 }

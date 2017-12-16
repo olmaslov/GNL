@@ -21,10 +21,11 @@
 
 int		get_next_line(const int fd, char **line);
 
-typedef struct		s_list
+typedef struct		s_file
 {
-	char			*content;
-	struct s_list	*next;
-}					t_list;
+	int				fd;
+	int				countch;
+	struct s_file	*next;
+}					t_file;
 
 #endif

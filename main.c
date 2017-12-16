@@ -22,6 +22,8 @@ int main(int argc, char **argv)
 	line = (char *)malloc(10000);
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, line);
+	get_next_line(fd, line);
+	get_next_line(fd, line);
 	printf("%s\n", line);
 	return (0);
 }

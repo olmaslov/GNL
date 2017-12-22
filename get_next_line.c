@@ -12,29 +12,6 @@
 
 #include "get_next_line.h"
 
-static int	ft_bufcnt(int fd)
-{
-	char	buf1[BUF_SIZE + 1];
-	int		len;
-
-	len = 0;
-	while ((read(fd, buf1, BUF_SIZE)) != 0)
-		len++;
-	close(fd);
-	return (len);
-}
-
-char	*gnl_cat(char *s1, const char *s2)
-{
-	size_t x;
-
-	x = ft_strlen(s1);
-	while (*s2 != '\0')
-		s1[x++] = *s2++;
-	s1[x++] = '\0';
-	return (s1);
-}
-
 int		get_next_line(const int fd, char **line)
 {
 	char	buf1[BUF_SIZE + 1];
@@ -50,24 +27,19 @@ int		get_next_line(const int fd, char **line)
 
 	ret = 0;
 	buff = (char *)malloc(sizeof(char) * 1000);
-
-//	if (fd == list->fd)
-//		ret = list->countch;
 	if (list != NULL)
 	{
 		s2 = list->content;
 		x = 0;
 		while (*s2 && *s2 != '\n')
 			buff[x++] = *s2++;
-		buff[x++] = '\0';
-		//buff = ft_strcat(buff, list->content);
-		if (s2[x] == '\n')
+		if (*s2 == '\n')
 		{
 			list->content = s2 + 1;
 			*line = buff;
 			return (1);
 		}
-		ret = x + 1;
+		ret = x;
 	}
 	while (read(fd, buf1, BUF_SIZE))
 	{
@@ -78,14 +50,15 @@ int		get_next_line(const int fd, char **line)
 			if (buf1[j] == '\n')
 			{
 				j++;
-				ft_bzero(buf1 + BUF_SIZE, 2);
+				buf1[BUF_SIZE] = '\0';
 				buff[ret] = '\0';
 				if (list == NULL)
 				{
 					list = ft_lstnew((void *)(buf1 + j), ft_strlen(buf1 + j));
+					list->content = buf1 + j;
 					list->content_size = fd;
 				}
-				else if (list->content_size != fd, list->next == NULL)
+				else if (list->content_size |= (size_t)fd, list->next == NULL)
 				{
 					list->next = ft_lstnew((void *)(buf1 + j), ft_strlen(buf1 + j));
 					list = list->next;
@@ -102,23 +75,6 @@ int		get_next_line(const int fd, char **line)
 			ret++;
 			j++;
 		}
-
-//		j = 0;
-//		while (buf1[j])
-//		{
-//
-////			buff[ret] = buf1[j];
-//			if (buf1[j] == '\n')
-//			{
-////				list->countch = ret -3;
-////				list->fd = fd;
-////				list = list->next;
-//				return (1);
-//			}
-//			ret++;
-//			j++;
-//		}
-
 	}
 
 	return (0);

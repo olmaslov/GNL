@@ -23,21 +23,21 @@ int main(int argc, char **argv)
 
 	line = (char *)malloc(10000);
 	fd = open(argv[1], O_RDONLY);
-	fd1 = open(argv[2], O_RDONLY);
-	fd2 = open(argv[3], O_RDONLY);
+	//fd1 = open(argv[2], O_RDONLY);
+	//fd2 = open(argv[3], O_RDONLY);
 	get_next_line(fd, &line);
 	printf("%s\n", line);
 	while (get_next_line(fd, &line))
 	{
 		printf("%s\n", line);
 	}
-	while (get_next_line(fd1, &line))
-	{
-		printf("%s\n", line);
-	}
-	while (get_next_line(fd2, &line))
-	{
-		printf("%s\n", line);
-	}
+//	while (get_next_line(fd1, &line))
+//	{
+//		printf("%s\n", line);
+//	}
+//	while (get_next_line(fd2, &line))
+//	{
+//		printf("%s\n", line);
+//	}
 	return (0);
 }

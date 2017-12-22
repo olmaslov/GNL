@@ -12,7 +12,7 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUF_SIZE 5
+# define BUF_SIZE 80
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -24,7 +24,7 @@ int		get_next_line(const int fd, char **line);
 typedef struct		s_file
 {
 	int				fd;
-	int				countch;
+	char			*endline;
 	struct s_file	*next;
 }					t_file;
 

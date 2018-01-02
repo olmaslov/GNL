@@ -12,18 +12,18 @@
 
 #include "libft.h"
 
-#define BUF_SIZE 1
+#define BUFF_SIZE 1
 
 static int	ft_buffcnt(char *inp)
 {
-	char	buf1[BUF_SIZE];
+	char	buf1[BUFF_SIZE];
 	int		len;
 	int		fd;
 
 	len = 0;
 	if (!(fd = open(inp, O_RDONLY)))
 		ft_putstr("Open error");
-	while ((read(fd, buf1, BUF_SIZE)) != 0)
+	while ((read(fd, buf1, BUFF_SIZE)) != 0)
 		len++;
 	close(fd);
 	return (len);
@@ -31,7 +31,7 @@ static int	ft_buffcnt(char *inp)
 
 char		*ft_read(char *inp)
 {
-	char	buf1[BUF_SIZE];
+	char	buf1[BUFF_SIZE];
 	char	*buff;
 	int		ret;
 	int		fd;
@@ -39,7 +39,7 @@ char		*ft_read(char *inp)
 	if (inp == NULL)
 		return (NULL);
 	ret = 0;
-	buff = malloc(sizeof(char) * (ft_buffcnt(inp) * BUF_SIZE) + 1);
+	buff = malloc(sizeof(char) * (ft_buffcnt(inp) * BUFF_SIZE) + 1);
 	if (buff == NULL)
 		return (NULL);
 	if (!(fd = open(inp, O_RDONLY)))
@@ -48,7 +48,7 @@ char		*ft_read(char *inp)
 		free(buff);
 		return (NULL);
 	}
-	while (read(fd, buf1, BUF_SIZE))
+	while (read(fd, buf1, BUFF_SIZE))
 	{
 		buff[ret] = buf1[0];
 		ret++;

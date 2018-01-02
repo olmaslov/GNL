@@ -12,19 +12,20 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUF_SIZE 838464
+# define BUFF_SIZE 100
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include "libft/libft.h"
 
-int		get_next_line(const int fd, char **line);
+int					get_next_line(const int fd, char **line);
 
 typedef struct		s_file
 {
 	int				fd;
-	char			*endline;
+	size_t			content_size;
+	char			*content;
 	struct s_file	*next;
 }					t_file;
 

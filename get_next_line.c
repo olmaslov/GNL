@@ -12,23 +12,69 @@
 
 #include "get_next_line.h"
 
+t_file	*listfilenew(void const *content, size_t content_size, int fd, t_file *list)
+{
+	t_file *new;
+
+	if (!(new = (t_file *)malloc(sizeof(*new))))
+		return (NULL);
+	if (!(new->content = malloc(content_size)))
+	{
+		free(new);
+		return (NULL);
+	}
+	if (!content)
+	{
+		new->content = NULL;
+		new->content_size = 0;
+		new->fd = fd;
+		new->next = list;
+		return (new);
+	}
+	new->fd = fd;
+	new->content_size = content_size;
+	ft_memcpy(new->content, content, content_size);
+	new->next = list;
+	return (new);
+}
+
+t_file	*searchfd(int fd, t_file *list)
+{
+	t_file	*listf;
+	t_file	*temp;
+
+	listf = list;
+	temp = list;
+	while (listf->fd != fd)
+	{
+		listf = listf->next;
+		if (listf == temp)
+			break;
+	}
+	return (listf);
+}
+
 int		get_next_line(const int fd, char **line)
 {
-	char	buf1[BUF_SIZE + 1];
+	char	buf1[BUFF_SIZE + 1];
 	char	*buff;
 	char	*s2;
 	int		ret;
 	int		j;
-	static 	t_list	*list;
+	static 	t_file	*list;
+	int		s;
 	size_t x;
 
-
-
-
 	ret = 0;
-	buff = (char *)malloc(sizeof(char) * 1000);
-	if (list != NULL)
+	buff = (char *)malloc(sizeof(char) * BUFF_SIZE + 1);
+	if (list != NULL && list->fd != fd)
 	{
+		list = searchfd(fd, list);
+	}
+	if (list != NULL && list->fd == fd)
+	{
+//		while (list->fd != fd && list->next != NULL)
+
 		s2 = list->content;
 		x = 0;
 		while (*s2 && *s2 != '\n')
@@ -41,41 +87,46 @@ int		get_next_line(const int fd, char **line)
 		}
 		ret = x;
 	}
-	while (read(fd, buf1, BUF_SIZE))
+	while ((s = read(fd, buf1, BUFF_SIZE)) != 0)
 	{
 		j = 0;
-		while (j < BUF_SIZE)
+		if (s == -1)
+			return (-1);
+		while (j < BUFF_SIZE)
 		{
 			buff[ret] = buf1[j];
-			if (buf1[j] == '\n')
+			if (buf1[j] == '\n' || buf1[j] == '\0')
 			{
+				if (buf1[j] == EOF)
+					return -1;
 				j++;
-				buf1[BUF_SIZE] = '\0';
+				buf1[BUFF_SIZE] = '\0';
 				buff[ret] = '\0';
 				if (list == NULL)
 				{
-					list = ft_lstnew((void *)(buf1 + j), ft_strlen(buf1 + j));
-					list->content = buf1 + j;
-					list->content_size = fd;
+					list = listfilenew((void *)(buf1 + j), ft_strlen(buf1 + j), fd, NULL);
+					list->next = list;
 				}
-				else if (list->content_size |= (size_t)fd, list->next == NULL)
+				else if (list->fd != fd)
 				{
-					list->next = ft_lstnew((void *)(buf1 + j), ft_strlen(buf1 + j));
+					list->next = listfilenew((void *)(buf1 + j), ft_strlen(buf1 + j), fd, list);
 					list = list->next;
-					list->content_size = fd;
+
 				}
 				else
 				{
-					list->content = (buf1 + j);
-					list->content_size = fd;
+					list->content = ft_strdup(buf1 + j);
+					list->fd = fd;
 				}
 				*line = buff;
 				return (1);
 			}
+			buff = ft_strjoin(ft_strnew(BUFF_SIZE + 1), buff);
 			ret++;
 			j++;
 		}
 	}
-
+	if (s == 0 && buff[0] != '\0')
+		*line = buff;
 	return (0);
 }
